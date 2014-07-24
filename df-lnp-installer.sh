@@ -1328,7 +1328,6 @@ install_phoebus_gfx_pack () {
 	local GFX_PACK="$DOWNLOAD_DIR/Phoebus_40_04v00.zip"
 	local TEMP_UNZIP_DIR="./phoebus_unzip"
 	local INSTALL_GFX_DIR="$DEST_DIR/LNP/graphics/[16x16] Phoebus 34.11v01"
-	local LNP_PATCH_DIR="./patches/phoebus_gfx"
 
 	mkdir -p "$TEMP_UNZIP_DIR"
 	unzip -d "$TEMP_UNZIP_DIR" "$GFX_PACK"
@@ -1411,22 +1410,6 @@ install_phoebus_gfx_pack () {
 	exit_with_error "Installing Phoebus init failed."
 	fi
 
-	# Apply LNP patches.
-	patch -d "$INSTALL_GFX_DIR/data/init/" < "$LNP_PATCH_DIR/init_lnp_defaults.patch"
-	patch -d "$INSTALL_GFX_DIR/data/init/" < "$LNP_PATCH_DIR/dinit_lnp_defaults.patch"
-
-	if [ "$?" != "0" ]; then
-		# Clean up after ourself.
-		if [ -e "$TEMP_UNZIP_DIR" ]; then
-			rm -r "$TEMP_UNZIP_DIR"
-		fi
-
-		if [ -e "$INSTALL_GFX_DIR" ]; then
-			rm -r "$INSTALL_GFX_DIR"
-		fi
-
-	exit_with_error "Applying Phoebus LNP patches failed."
-	fi
 
 	# Install raws
 	mkdir -p "$INSTALL_GFX_DIR/raw"
