@@ -528,9 +528,8 @@ download_all () {
     download_dffi_file "http://dffd.wimbli.com/download.php?id=8185&f=blueprints.zip"
 
 	# Graphics packs.
-	download_dffi_file "http://dffd.wimbli.com/download.php?id=2430&f=Phoebus_34_11v01.zip"
+	download_dffi_file "http://dffd.wimbli.com/download.php?id=2430&f=Phoebus_40_04v00.zip"
 	download_dffi_file "http://dffd.wimbli.com/download.php?id=5945&f=CLA_graphic_set_v15-STANDALONE.rar"
-	download_dffi_file "http://dffd.wimbli.com/download.php?id=7362&f=Ironhand16+upgrade+0.73.4.zip"
 	download_file "http://www.alexanderocias.com/jollybastion/JollyBastion34-10v5.zip"
 	download_dffi_file "http://dffd.wimbli.com/download.php?id=7025&f=Mayday+34.11.zip"
 	download_dffi_file "http://dffd.wimbli.com/download.php?id=7728&f=%5B16x16%5D+Obsidian+%28v.0.8%29.zip"
@@ -859,7 +858,6 @@ install_all () {
 
 	install_phoebus_gfx_pack
 	install_cla_graphics_pack
-	install_ironhand_gfx_pack
 	install_mayday_gfx_pack
 	install_obsidian_gfx_pack
 	install_spacefox_gfx_pack
@@ -1251,14 +1249,6 @@ install_gfx_pack () {
 	rm -r "$TEMP_UNZIP_DIR"
 }
 
-install_ironhand_gfx_pack () {
-	local GFX_PACK="$DOWNLOAD_DIR/Ironhand16 upgrade 0.73.4.zip"
-	local GFX_PREFIX="Dwarf Fortress"
-	local INSTALL_GFX_DIR="$DEST_DIR/LNP/graphics/[16x16] Ironhand 0.73.4"
-	local LNP_PATCH_DIR="./patches/ironhand_gfx"
-
-	install_gfx_pack "$GFX_PACK" "$GFX_PREFIX" "$INSTALL_GFX_DIR" "$LNP_PATCH_DIR"
-}
 
 install_jolly_bastion_gfx_pack () {
 	local GFX_PACK="$DOWNLOAD_DIR/JollyBastion34-10v5.zip"
@@ -1334,7 +1324,8 @@ install_obsidian_gfx_pack () {
 
 install_phoebus_gfx_pack () {
 	# NOTE: Cannot use install_gfx_pack method because Phoebus data/init/ folder is packed weird.
-	local GFX_PACK="$DOWNLOAD_DIR/Phoebus_34_11v01.zip"
+    echo "installing phoebus"
+	local GFX_PACK="$DOWNLOAD_DIR/Phoebus_40_04v00.zip"
 	local TEMP_UNZIP_DIR="./phoebus_unzip"
 	local INSTALL_GFX_DIR="$DEST_DIR/LNP/graphics/[16x16] Phoebus 34.11v01"
 	local LNP_PATCH_DIR="./patches/phoebus_gfx"
