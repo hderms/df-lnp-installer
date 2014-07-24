@@ -517,7 +517,7 @@ download_all () {
 	fi
 
 	# Apps and utilities
-	download_file "http://www.bay12games.com/dwarves/df_34_11_linux.tar.bz2"
+	download_file "http://www.bay12games.com/dwarves/df_40_04_linux.tar.bz2"
 	download_file "http://dethware.org/dfhack/download/dfhack-0.34.11-r3-Linux.tar.gz"
 	download_dffi_file "http://dffd.wimbli.com/download.php?id=7248&f=Utility_Plugins_v0.44-Windows-0.34.11.r3.zip.zip"
 	download_file "http://df.zweistein.cz/soundsense/soundSense_42_186.zip"
@@ -1494,7 +1494,7 @@ install_spacefox_gfx_pack () {
 }
 
 install_vanilla_df () {
-	local VANILLA_DF_TARBALL="$DOWNLOAD_DIR/df_34_11_linux.tar.bz2"
+	local VANILLA_DF_TARBALL="$DOWNLOAD_DIR/df_40_04_linux.tar.bz2"
 
 	# Extract to the installation directory.
 	tar --directory "$DEST_DIR" -xjvf "$VANILLA_DF_TARBALL"
