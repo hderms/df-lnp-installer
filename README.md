@@ -99,6 +99,7 @@ Full Installation
 
 Upgrading an Existing Installation
 ==================================
+WARNING: This feature has not been tested on this distribution
 
 1. Update your git repository with `git pull`
 2. Run `./df-lnp-installer.sh --upgrade`. When asked, enter the directory you already installed DF into.
