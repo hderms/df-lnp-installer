@@ -1,10 +1,16 @@
-This Is Unmaintained
-====================
-As of 2014-06-24, this repository is unmaintained. No further updates will be added. See [this post for more
-information](http://www.bay12forums.com/smf/index.php?topic=130792.msg5403952#msg5403952).
+WARNING
+===================
+Do not use this tool on save files. I have not tested/updated the patching feature so I don't know what it will do with all these files being changed. I would assume that it would break your save file.
 
-You are free to fork this under the terms of the
-[GPLv3](https://www.gnu.org/licenses/gpl.html) or study the code to build your own under another license.
+Intro 
+====================
+I wanted to play dwarf fortress on Wed, July 24th, 2014 and found that the Lazy Noob pack wasn't working properly because of changed checksums. Unfortunately, updating the failed files/checksums did not seem to have the desired effect. Instead, I converted this pack to work with Dwarf Fortress 40.04. 
+
+Maintenance
+===================
+Since I am an extreme Dwarf Fortress noob (I've spent more time trying to get this tool to work than actually playing the game), I don't know what's broken and what works. As far as I can see, the default installation produces a workable game which opens up Soundsense, Dwarf Therapist, etc...
+
+Only Phoebus graphics pack has been tested. Patching/upgrading save files has not been tested, and will almost certainly not work right now.
 
 Overview
 ========
