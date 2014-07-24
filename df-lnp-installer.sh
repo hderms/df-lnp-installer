@@ -1,5 +1,26 @@
 #!/bin/sh
 
+
+#Installs prerequisite dependencies if we are on a platform for which the packages required have known names
+# FIXME: Absolute garbage shell scripting needs some sanity.
+FILENAME='/etc/*-release'
+UBUNTU_14_STRING="Ubuntu 14"
+FEDORA_STRING="Fedora"
+CENTOS_STRING="Centos"
+
+#Check for Ubuntu 14
+if command -v apt-get >/dev/null 2>&1
+then
+    echo "found ubuntu"
+    sudo apt-get install default-jre libsdl1.2debian:i386 libsdl-image1.2:i386 libsdl-ttf2.0-0:i386 libglu1-mesa:i386 libgtk2.0-0:i386 libopenal1:i386 libjpeg62:i386 git mercurial libqt4-dev qt4-qmake wget coreutils tar unzip unrar make g++ gcc patch xterm sed python bzip2
+fi
+
+#Check for Fedora
+if command -v yum >/dev/null 2>&1
+then
+    sudo yum install java-1.7.0-openjdk gcc gcc-c++ automake libgcc.i686 git cmake glibc-devel.i686 zlib-devel.i686 perl-XML-LibXSLT perl-XML-LibXML mercurial qt.i686 libgcc.i686 qt-devel SDL.i686 SDL_image.i686 SDL_ttf.i686 gtk2.i686 mesa-libGLU.i686 openal-soft.i686 libsndfile.i686 xterm unrar unzip python
+fi
+
 # Function declarations.
 ask_for_preferred_install_dir () {
 	# Suggest either the default INSTALL_DIR or a known installation location, as set in config file.
@@ -529,7 +550,6 @@ download_all () {
 
 	# Graphics packs.
 	download_dffi_file "http://dffd.wimbli.com/download.php?id=2430&f=Phoebus_40_04v00.zip"
-	download_dffi_file "http://dffd.wimbli.com/download.php?id=5945&f=CLA_graphic_set_v15-STANDALONE.rar"
 	download_file "http://www.alexanderocias.com/jollybastion/JollyBastion34-10v5.zip"
 	download_dffi_file "http://dffd.wimbli.com/download.php?id=7025&f=Mayday+34.11.zip"
 	download_dffi_file "http://dffd.wimbli.com/download.php?id=7728&f=%5B16x16%5D+Obsidian+%28v.0.8%29.zip"
@@ -685,21 +705,6 @@ exit_with_error () {
 	exit 1
 }
 
-fix_cla_missing_mouse_png () {
-	local CLA_FOLDER="$DEST_DIR/LNP/graphics/[16x16] CLA v15"
-	local VANILLA_GFX_FOLDER="$DEST_DIR/LNP/graphics/[16x16] ASCII Default 0.34.11"
-
-	cp "$VANILLA_GFX_FOLDER/data/art/mouse.png" "$CLA_FOLDER/data/art/mouse.png"
-
-	if [ "$?" != "0" ]; then
-		# Clean up after ourself.
-		if [ -e "$CLA_FOLDER/data/art/mouse.png" ]; then
-			rm "$CLA_FOLDER/data/art/mouse.png"
-		fi
-
-		exit_with_error "Applying CLA Missing Mouse patch failed."
-	fi
-}
 
 fix_jolly_bastion_missing_graphics_dir () {
 	local JB_FOLDER="$DEST_DIR/LNP/graphics/[12x12] Jolly Bastion 34.10v5"
@@ -857,7 +862,6 @@ install_all () {
 	install_falconne_dfhack_plugins
 
 	install_phoebus_gfx_pack
-	install_cla_graphics_pack
 	install_mayday_gfx_pack
 	install_obsidian_gfx_pack
 	install_spacefox_gfx_pack
@@ -911,14 +915,6 @@ install_chromafort () {
 	rm -r "$CHROMAFORT_TEMP_FOLDER"
 }
 
-install_cla_graphics_pack () {
-	local GFX_PACK="$DOWNLOAD_DIR/CLA_graphic_set_v15-STANDALONE.rar"
-	local GFX_PREFIX="CLA"
-	local INSTALL_GFX_DIR="$DEST_DIR/LNP/graphics/[16x16] CLA v15"
-	local LNP_PATCH_DIR="./patches/cla_gfx"
-
-	install_gfx_pack "$GFX_PACK" "$GFX_PREFIX" "$INSTALL_GFX_DIR" "$LNP_PATCH_DIR"
-}
 
 install_df_announcement_filter () {
 	local DFAF_ZIP="$DOWNLOAD_DIR/DFAnnouncementFilter.zip"
